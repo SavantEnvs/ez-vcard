@@ -1,0 +1,11 @@
+project: savantenvs/ez-vcard
+target: fuzz-vcard
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz-vcard/testsuite
+cmds:
+  # Jazzer (JVM) libFuzzer target: JVM start + class instrumentation is a fixed ~3-4 s setup per
+  # process (INITED on the seeds at ~4 s), so the per-process bound is 60 s, not the native 5 s.
+  - cmd: /mayhem/fuzz-vcard
+    libfuzzer: true
+    timeout: 60
