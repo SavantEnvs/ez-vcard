@@ -1,0 +1,201 @@
+<html>
+	<head>
+		<link rel="profile" href="http://microformats.org/profile/hcard" />
+		<style>
+			body, table {
+				font-family:arial;
+				font-size: 10pt;
+				line-height: 1.5em;
+			}
+			img {
+				border: 0;
+			}
+			.l {
+				font-variant: small-caps;
+			}
+			.indent {
+				margin-left: 5px;
+				padding-left: 5px;
+				border-left: 1px solid #000;
+			}
+			#imagePopup {
+				position: fixed;
+				z-index: 999; /* prevent audio control from appearing over the div */
+				left: 0px;
+				top: 0px;
+				height: 100%;
+				width: 100%;
+				cursor: pointer;
+				background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wMAhA0IS20E6cAAAQWSURBVFjDXVdBktxADAKXf5xvJG8mB0CSJ5Xa3fG0uyWEEM1/f//+ESAAAAkKFABCAAEAEkhK8HNKAElIEAn4swhlKb0bRG8hQSAIKFv6a4h80fN8lET6cHg55RfhoyQKEKHsJcIH+lRCgOYgJrpEDUKJgPn4zOHdoOEpr7Pp9nsyP0EHOP8oh+tUg01TYX4nB0CQxNdf0lmh2AEkJxGh8Td4GIb81UeCgoYLxAYRhNS885F0CRwoW2F4G0OvwY2ihOJL+pnjzn8/gQhRDLCkJNBl1WCFVO5NTUSvEbq/YeN5gCzJ4cldoUl4wkJJ5XWjP6+7Nuy5D00Vyqe7rJLKZa/0e+HBZIykSZdROO1kKgsFzUhzSsYE/yq1cnCCjAVLxMSXluK8LZy0u2gJgqRpXnLJklWFgM+Q3tENFaU5etrSB0uSVHJRxYSbJTfNQovGrJLKEbxmmgVlOR5CYsq9rV18hB9R0WgYtf1eFQjG0yZ9+Qk+TmYKz+m/xsdRAYkyKuKoZtnnxgssUR8dZSBU0IzgKyUVK+kmfcTUqPbrya7MiDIXVGvpSKBP1zKE0xJGAG2BrJai8jqaM4THKRerCS40aGQ8NdSuSbdciQ2vJKglIFOhHrQNkxOLZA5gS1A2+GlzPZrJqUCw8r4ZW3im/TpboroKfnJiGNxbk4qz87XyJAam9GxXzHTRlQ9B0LsztEzuUAmrP4qm6kgkQtPiFjOe1ljQW/TK2ExDAI9GKoeM5VcfSSF0m9vN0HhYofYvlzZUnxGduaKwyYIjAs+yfA8RRw3ZggAfJIMEazJ45KppplCjmeRAXXooHMDlTOhXtk7m6zowvklZIZFXqUr+/s2jpO0fUqDeBfmEJqyyC2L0VTOIIzgRlzsNG6kRbaeq4GntjOv5aIa2z1WS+nEb0G1mF7DC8Unbgiilj3RJWT07XNSzkqlhWGWxxFo0NB5xwsOS22OEmtaN9Ee4HURqXLl5pqZyeDwTdSaGy6/w1+xIs8cyT4svwFwFXVsinJ8U8VgIPQOE26M1IFwWTxaVERy7MU5hbf3R6Bq0jl4rF/QeejL+bQfKmVp1RLkA7JR1LpXloYx2Eh00lPBHffis7+nMj2rEYdm5DGlXStMR23/HkuQmE13SOruOoAiEqPdcQXj8ZyywBdnvq46/DhX3AjW8mAm1V6TejLhDSRpHNEqSfszNC8NcbDzxc7X8pblWFp0Wd+pjE8Rcp469fDLQic8YyabHJv1sYEUu6jwUx3r5saYnm58ILMV1PBNsFTadLeAaFLb0JWDvZeN/jq0mxdH4WPeRZNkTYuwUJ3BCez2pl8XctMidEnvj0U5AYPtC3+vbzBqR0PNBpm1VBcyIBw/wXMq11ydJnvugZe0zrvW9slIS/wNESZPPo52/lwAAAABJRU5ErkJggg==');
+			}
+		</style>
+		
+		<script>
+			function showImage(a){
+				var imgs = a.getElementsByTagName('img');
+				if (imgs.length == 0){
+					return;
+				}
+				var img = imgs[0];
+	
+				var imagePopup_img = document.getElementById("imagePopup_img");
+				imagePopup_img.src = img.src;
+				var imagePopup = document.getElementById('imagePopup');
+				imagePopup.style.display = 'block';
+			}
+	
+			function resizeRelative(img, maxHeight, maxWidth) {
+				var ratio = 0;
+				var width = img.width;
+				var height = img.height;
+				
+				if (width > maxWidth) {
+					ratio = maxWidth / width;
+					img.width = maxWidth;
+					img.height = height * ratio;
+					height = height * ratio;
+					width = width * ratio;
+				}
+				
+				if (height > maxHeight) {
+					ratio = maxHeight / height;
+					img.height = maxHeight;
+					img.width = width * ratio;
+				}
+			}
+		</script>
+	</head>
+	<body>
+	
+	<div id="imagePopup" onclick="this.style.display='none'" style="display:none">
+		<table style="width:100%; height:100%">
+			<tr>
+				<td valign="middle" align="center">
+					<img id="imagePopup_img" src="" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="vcard">
+	
+		<table>
+			<tr>
+				<td valign="top">
+					
+						<img  onload="resizeRelative(this, 100, 100)" src="data:image/png;base64,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" />
+					
+				</td>
+				<td valign="top">
+						<h1 class="fn">Frank Dawson</h1>
+					
+					
+					
+				</td>
+			</tr>
+		</table>
+		
+		
+		<br />
+		
+		
+		
+
+		<table>
+			<tr>
+				<td valign="top">
+						<span class="l">Addresses:</span>
+						<div class="indent">
+							<div class="adr">
+
+									<i>
+										<span class="type">Work</span>, 
+										<span class="type">Postal</span>, 
+										<span class="type">Parcel</span>
+									</i><br />
+
+
+									<span class="street-address">6544 Battleford Drive</span><br />
+									<span class="locality">Raleigh</span>, 
+									<span class="region">NC</span> 
+									<span class="postal-code">27613-3502</span>
+									<br /><span class="country-name">U.S.A.</span>
+							</div>
+							<br />
+						</div>
+				</td>
+				<td valign="top" style="padding-left:20px">
+						<span class="l">Phone numbers:</span>
+						<div class="indent">
+								<div class="tel">
+										<i>
+												<span class="type">Voice</span>, 
+												<span class="type">Msg</span>, 
+												<span class="type">Work</span>
+										</i>: 
+									<span class="value">
+											+1-919-676-9515
+									</span>
+								</div>
+								<div class="tel">
+										<i>
+												<span class="type">Fax</span>, 
+												<span class="type">Work</span>
+										</i>: 
+									<span class="value">
+											+1-919-676-9564
+									</span>
+								</div>
+						</div>
+						<br />
+					
+						<span class="l">Emails:</span>
+						<div class="indent">
+								<div class="email">
+										<i>
+												<span class="type">Internet</span>, 
+												<span class="type">Pref</span>
+										</i>: 
+									<a class="value" href="mailto:Frank_Dawson@Lotus.com">Frank_Dawson@Lotus.com</a>
+								</div>
+								<div class="email">
+										<i>
+												<span class="type">Internet</span>
+										</i>: 
+									<a class="value" href="mailto:fdawson@earthlink.net">fdawson@earthlink.net</a>
+								</div>
+						</div>
+						<br />
+					
+					
+						<span class="l">URLs:</span>
+						<div class="indent">
+								<a class="url" href="http://home.earthlink.net/~fdawson">http://home.earthlink.net/~fdawson</a><br />
+						</div>
+				</td>
+				
+				<td valign="top" style="padding-left:20px">
+					
+					
+					
+					
+						<span class="l">Organization: </span>
+						<span class="org">
+									<span class="organization-name">Lotus Development Corporation</span>
+						</span>
+						<br />
+
+					
+				</td>
+			</tr>
+		</table>
+		
+		
+		<abbr class="prodid" title="ez-vcard 0.12.3-SNAPSHOT"></abbr>
+	</div>
+	
+	<i>hCard specs: <a href="http://microformats.org/wiki/hcard">http://microformats.org/wiki/hcard</a></i><br />
+	<i>Generated by <a href="https://github.com/mangstadt/ez-vcard">ez-vcard</a> 0.12.3-SNAPSHOT</i>
+		
+	</body>
+</html>

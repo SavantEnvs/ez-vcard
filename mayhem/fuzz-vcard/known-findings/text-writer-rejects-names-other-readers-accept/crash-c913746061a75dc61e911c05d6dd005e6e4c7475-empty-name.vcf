@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:2.1:NeoD
+;John;;Mr.;III
+FN:John Doe III
+NICKNAME:Joey
+ORG:Company, The;TheDepartment
+TITLE:The Job Title
+NOTE;ENCODING=QUOTED-PRINTABLE:This is the note field!!=0Dw0BAQEFAAOBjQAwgYkCgYEA3rcmQ6aZhc04pxUJuc8PycNVjIjujI0oJyRLKl6g2Bb6
+    YRhLz21ggNM1QDJywI8S2OVOj7my9tkVXlqGMaO6hqpryNlxjMzNJxMenUJdOPanrO/6YvMY
+    gdQkRn8Bd3zGKok=
+ca
+URL;WORK:http://web-page-address.com
+ROLE:TheProfession
+BDAY:19800321
+KEY;X509;ENCODING=BASE64:
+    MIIDITCCAoqgAwIBAgIQT52W2WawmStUwpVL/
+    92ZzKbeVCq3Yi7LeIOkKcGQR8tBV9TTANCMha8XBgkq2eh7
